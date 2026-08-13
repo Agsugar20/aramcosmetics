@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회사소개 | 아람코스메틱</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a231c; --ink-soft:#6b6156;
+    --brown-950:#241d17; --brown-900:#332920;
+    --gold-700:#8f6c1f; --gold-600:#a9822f; --gold-500:#c9a227; --gold-300:#e3cd82; --gold-100:#f3e9c9;
+    --cream:#faf7ef; --ivory:#f2ede0; --paper:#fffdf8;
+    --line:rgba(42,35,28,0.12); --gold-line:rgba(201,162,39,0.4);
+    --serif:'Noto Serif KR', serif; --sans:'Noto Sans KR', sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans); color:var(--ink); background:var(--cream); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 22px;}}
+
+  header.nav{position:sticky; top:0; z-index:100; background:rgba(255,253,248,0.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); padding:16px 0;}
+  header.nav .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:var(--serif); font-weight:700; font-size:19px; color:var(--ink); display:flex; align-items:center; gap:10px;}
+  .logo-img{height:30px; width:auto; display:block;}
+  .brand .sub{font-family:var(--sans); font-weight:300; font-size:10.5px; color:var(--gold-700); letter-spacing:.16em; display:block; margin-top:2px;}
+  .back-link{font-size:13.5px; color:var(--ink-soft); display:flex; align-items:center; gap:8px; transition:color .25s var(--ease);}
+  .back-link:hover{color:var(--gold-700);}
+
+  .ph-hero{padding:80px 0 64px; border-bottom:1px solid var(--line); background:var(--paper);}
+  .ph-eyebrow{display:flex; align-items:center; gap:10px; font-size:12.5px; letter-spacing:.26em; color:var(--gold-700); margin-bottom:20px;}
+  .ph-eyebrow::before{content:''; width:26px; height:1px; background:var(--gold-500);}
+  .ph-title{font-family:var(--serif); font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.35; max-width:720px;}
+  .ph-desc{margin-top:22px; max-width:600px; color:var(--ink-soft); font-size:15.5px; font-weight:300; line-height:1.9;}
+
+  section{padding:90px 0;}
+  @media (max-width:760px){section{padding:60px 0;}}
+  .sec-head{max-width:640px; margin-bottom:52px;}
+  .sec-eyebrow{display:flex; align-items:center; gap:10px; font-size:12px; letter-spacing:.24em; color:var(--gold-700); margin-bottom:16px;}
+  .sec-eyebrow::before{content:''; width:22px; height:1px; background:var(--gold-500);}
+  .sec-title{font-family:var(--serif); font-weight:600; font-size:clamp(22px,2.8vw,30px); color:var(--ink); line-height:1.4;}
+
+  .values{background:var(--paper);}
+  .values-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:900px){.values-grid{grid-template-columns:repeat(2,1fr);}}
+  .value-cell{background:var(--paper); padding:34px 26px;}
+  .value-num{font-family:var(--serif); font-size:13px; color:var(--gold-500); letter-spacing:.1em;}
+  .value-name{font-family:var(--serif); font-size:19px; font-weight:600; color:var(--ink); margin-top:14px;}
+  .value-desc{margin-top:10px; font-size:13.3px; color:var(--ink-soft); font-weight:300; line-height:1.75;}
+
+  .history{background:var(--ivory);}
+  .timeline-columns{display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:760px;}
+  @media (max-width:640px){.timeline-columns{grid-template-columns:1fr; gap:0;}}
+  .timeline{border-left:1px solid var(--line); margin-left:6px; padding-left:36px;}
+  .t-item{position:relative; padding-bottom:32px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{content:''; position:absolute; left:-41px; top:4px; width:9px; height:9px; border-radius:50%; background:var(--paper); border:2px solid var(--gold-500);}
+  .t-year{font-family:var(--serif); font-weight:600; color:var(--ink); font-size:16px;}
+  .t-desc{margin-top:5px; color:var(--ink-soft); font-size:14px; font-weight:300; line-height:1.9;}
+
+  .cert-recap{background:var(--paper);}
+  .cert-list{max-width:640px;}
+  .cert-row{display:flex; justify-content:space-between; align-items:baseline; padding:16px 0; border-bottom:1px solid var(--line); gap:20px;}
+  .cert-row .name{font-family:var(--serif); font-weight:600; color:var(--ink); font-size:15.5px; white-space:nowrap;}
+  .cert-row .desc{font-size:13px; color:var(--ink-soft); font-weight:300; text-align:right;}
+  .cert-more{margin-top:26px; font-size:13.5px; color:var(--gold-700); text-decoration:underline; text-underline-offset:3px;}
+
+  .cta-band{background:var(--brown-950); padding:70px 0; text-align:center;}
+  .cta-band h3{font-family:var(--serif); font-size:24px; color:var(--paper); font-weight:600;}
+  .cta-band p{margin-top:12px; color:rgba(250,247,239,.65); font-size:14.5px; font-weight:300;}
+  .cta-band a{
+    display:inline-flex; margin-top:28px; padding:15px 32px; background:var(--gold-500); color:var(--brown-950);
+    font-size:14.5px; font-weight:600; letter-spacing:.02em; transition:transform .3s var(--ease);
+  }
+  .cta-band a:hover{transform:translateY(-2px);}
+
+  footer{background:var(--paper); padding:36px 0; border-top:1px solid var(--line); text-align:center;}
+  footer p{font-size:12.5px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img class="logo-img" src="images/logo-black.png" alt="아람코스메틱 로고">
+      <span>아람코스메틱<span class="sub">ARAM COSMETICS, LTD.</span></span>
+    </div>
+    <a href="index.html" class="back-link">&larr; 홈으로</a>
+  </div>
+</header>
+
+<section class="ph-hero">
+  <div class="wrap">
+    <div class="ph-eyebrow">ABOUT ARAM COSMETICS</div>
+    <h1 class="ph-title">화장품 제조, 그 기본에 충실합니다</h1>
+    <p class="ph-desc">아람코스메틱은 2017년 설립 이후, 물티슈·패드·클렌징티슈·마스크팩을 중심으로 화장품 및 위생용품 OEM·ODM 생산을 전문으로 해온 제조기업입니다. 정확한 공정과 국내외 인증을 바탕으로, 국내외 다양한 브랜드의 첫 생산 파트너가 되어왔습니다.</p>
+  </div>
+</section>
+
+<section class="values">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">OUR VALUES</div>
+      <h2 class="sec-title">아람코스메틱이 일하는 방식</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-cell">
+        <div class="value-num">01</div>
+        <div class="value-name">정확함</div>
+        <div class="value-desc">원료 입고부터 완제품 출고까지, 모든 공정을 정해진 기준대로 진행합니다.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">02</div>
+        <div class="value-name">전문성</div>
+        <div class="value-desc">물티슈·패드·티슈·마스크팩 생산에 특화된 설비와 노하우를 갖추고 있습니다.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">03</div>
+        <div class="value-name">신뢰</div>
+        <div class="value-desc">ISO·FDA 등록 등 국내외 인증을 통해 검증된 생산 기준을 유지합니다.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">04</div>
+        <div class="value-name">유연함</div>
+        <div class="value-desc">브랜드의 규모와 일정에 맞춰 소량 생산부터 대량 생산까지 대응합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="history">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">HISTORY</div>
+      <h2 class="sec-title">아람코스메틱의 발자취</h2>
+    </div>
+    <div class="timeline-columns">
+      <div class="timeline">
+        <div class="t-item"><div class="t-year">2017</div><div class="t-desc">주식회사 아람코스메틱 제조법인 및 공장설립<br>미국 No.1사와 MOU체결</div></div>
+        <div class="t-item"><div class="t-year">2018</div><div class="t-desc">미국 NICKA-K NEWYORK사와 MOU체결</div></div>
+        <div class="t-item"><div class="t-year">2019</div><div class="t-desc">ABSOLUTE NEWYORK사와 MOU체결</div></div>
+        <div class="t-item"><div class="t-year">2020</div><div class="t-desc">미국 Shin's Trading사와 MOU체결<br>파주시 등원리 187-6번지에 제조공장 증설</div></div>
+      </div>
+      <div class="timeline">
+        <div class="t-item"><div class="t-year">2021</div><div class="t-desc">의약외품제조업 등록 및 우수기업인증 취득</div></div>
+        <div class="t-item"><div class="t-year">2023</div><div class="t-desc">홍콩 시장 진출</div></div>
+        <div class="t-item"><div class="t-year">2025</div><div class="t-desc">대만 시장 진출</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cert-recap">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">CERTIFICATE</div>
+      <h2 class="sec-title">보유 인증</h2>
+    </div>
+    <div class="cert-list">
+      <div class="cert-row"><div class="name">ISO 22716</div><div class="desc">화장품 우수제조 및 품질관리 기준(GMP)</div></div>
+      <div class="cert-row"><div class="name">ISO 9001</div><div class="desc">품질경영시스템 국제 인증</div></div>
+      <div class="cert-row"><div class="name">ISO 14001</div><div class="desc">환경경영시스템 국제 인증</div></div>
+      <div class="cert-row"><div class="name">FDA 등록</div><div class="desc">미국 화장품 제조시설 등록(MoCRA)</div></div>
+      <div class="cert-row"><div class="name">의약외품 제조업</div><div class="desc">의약외품 제조업 신고증(제654호)</div></div>
+    </div>
+    <a href="index.html#certificate" class="cert-more">인증서 원본 보기 &rarr;</a>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h3>함께 만들 브랜드를 기다립니다</h3>
+  <p>처방 설계부터 생산까지, 아람코스메틱이 함께합니다.</p>
+  <a href="index.html#inquiry">제조 상담 문의하기</a>
+</div>
+
+<footer>
+  <p>경기도 파주시 조리읍 등원로105번길 94-16 · TEL 031-947-0948 · aram0948@naver.com</p>
+  <p style="margin-top:6px;">&copy; 2026 Aram Cosmetics, Ltd. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
