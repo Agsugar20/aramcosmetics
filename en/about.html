@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Aram Cosmetics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a231c; --ink-soft:#6b6156;
+    --brown-950:#241d17; --brown-900:#332920;
+    --gold-700:#8f6c1f; --gold-600:#a9822f; --gold-500:#c9a227; --gold-300:#e3cd82; --gold-100:#f3e9c9;
+    --cream:#faf7ef; --ivory:#f2ede0; --paper:#fffdf8;
+    --line:rgba(42,35,28,0.12); --gold-line:rgba(201,162,39,0.4);
+    --serif:'Noto Serif KR', serif; --sans:'Noto Sans KR', sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans); color:var(--ink); background:var(--cream); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 22px;}}
+
+  header.nav{position:sticky; top:0; z-index:100; background:rgba(255,253,248,0.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); padding:16px 0;}
+  header.nav .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:var(--serif); font-weight:700; font-size:19px; color:var(--ink); display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .logo-img{height:30px; width:auto; display:block;}
+  .brand .sub{font-family:var(--sans); font-weight:300; font-size:10.5px; color:var(--gold-700); letter-spacing:.16em; display:block; margin-top:2px;}
+
+  nav.menu ul{display:flex; align-items:center; gap:34px; list-style:none;}
+  nav.menu a{font-size:14.5px; color:var(--ink); opacity:.85; letter-spacing:.02em; position:relative; padding-bottom:4px; transition:color .3s var(--ease), opacity .3s var(--ease); text-decoration:none;}
+  nav.menu a::after{content:''; position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--gold-500); transition:width .3s var(--ease);}
+  nav.menu a:hover{opacity:1;}
+  nav.menu a:hover::after{width:100%;}
+  .nav-cta{border:1px solid var(--gold-500); color:var(--gold-700)!important; padding:9px 20px; font-size:13.5px; transition:background .3s var(--ease), color .3s var(--ease);}
+  nav.menu a.nav-cta{padding-bottom:9px;}
+  .nav-cta:hover{background:var(--gold-500); color:var(--paper)!important;}
+
+  .lang-toggle{display:flex; align-items:baseline; gap:8px; list-style:none;}
+  .lang-current{font-size:14px; font-weight:600; letter-spacing:.06em; color:var(--gold-700);}
+  .lang-sep{font-size:12px; color:var(--line);}
+  nav.menu a.lang-link{font-size:11px; letter-spacing:.06em; color:var(--ink-soft)!important; opacity:1!important;}
+  .lang-link:hover{color:var(--gold-700)!important;}
+
+  .burger{display:none; width:26px; height:20px; position:relative; cursor:pointer; background:none; border:0;}
+  .burger span{position:absolute; left:0; right:0; height:1.5px; background:var(--ink); transition:all .3s var(--ease);}
+  .burger span:nth-child(1){top:0;} .burger span:nth-child(2){top:9px;} .burger span:nth-child(3){top:18px;}
+
+  @media (max-width:900px){
+    nav.menu{
+      position:fixed; inset:0 0 0 26%; background:var(--paper);
+      display:flex; align-items:center; padding:0 40px;
+      transform:translateX(100%); transition:transform .45s var(--ease); z-index:99;
+    }
+    nav.menu.open{transform:translateX(0);}
+    nav.menu ul{flex-direction:column; align-items:flex-start; gap:26px;}
+    nav.menu a{font-size:19px;}
+    .nav-cta{display:inline-flex;}
+    .burger{display:block;}
+  }
+
+  .ph-banner{position:relative; width:100%; aspect-ratio:4.13/1; overflow:hidden;}
+  @media (max-width:760px){.ph-banner{aspect-ratio:4/3;}}
+  .ph-banner img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position: 50% 55%;}
+  .ph-banner-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,16,12,.35) 0%, rgba(20,16,12,.55) 100%);
+  }
+  .ph-banner-content{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center;
+    padding:0 24px;
+  }
+  .ph-banner .ph-title{
+    font-family:var(--sans); font-weight:700; letter-spacing:.06em;
+    color:var(--paper); font-size:clamp(28px,5vw,56px); max-width:none; line-height:1.3;
+    text-shadow:0 2px 16px rgba(0,0,0,.35);
+  }
+
+  .ph-hero{padding:56px 0 64px; border-bottom:1px solid var(--line); background:var(--paper);}
+  .ph-eyebrow{display:flex; align-items:center; gap:10px; font-size:12.5px; letter-spacing:.26em; color:var(--gold-700); margin-bottom:20px;}
+  .ph-eyebrow::before{content:''; width:26px; height:1px; background:var(--gold-500);}
+  .ph-title{font-family:var(--serif); font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.35; max-width:720px;}
+  .ph-desc{margin-top:22px; max-width:600px; color:var(--ink-soft); font-size:15.5px; font-weight:300; line-height:1.9;}
+
+  section{padding:90px 0;}
+  @media (max-width:760px){section{padding:60px 0;}}
+  .sec-head{max-width:640px; margin-bottom:52px;}
+  .sec-eyebrow{display:flex; align-items:center; gap:10px; font-size:12px; letter-spacing:.24em; color:var(--gold-700); margin-bottom:16px;}
+  .sec-eyebrow::before{content:''; width:22px; height:1px; background:var(--gold-500);}
+  .sec-title{font-family:var(--serif); font-weight:600; font-size:clamp(22px,2.8vw,30px); color:var(--ink); line-height:1.4;}
+
+  .ceo-greeting{background:var(--ivory); padding:100px 0;}
+  @media (max-width:760px){.ceo-greeting{padding:70px 0;}}
+  .greeting-body{max-width:680px; margin:0 auto; border-left:2px solid var(--gold-500); padding-left:32px;}
+  .greeting-body p{
+    font-family:var(--serif); font-size:17px; line-height:2; color:var(--ink);
+    font-weight:400; margin-bottom:22px; text-align:justify;
+  }
+  .greeting-body p:last-child{margin-bottom:0;}
+  .greeting-sign{
+    max-width:680px; margin:36px auto 0; padding-top:28px; border-top:1px solid var(--line);
+    display:flex; align-items:baseline; justify-content:flex-end; gap:14px;
+  }
+  .sign-role{font-size:14px; color:var(--ink-soft); font-weight:300;}
+  .sign-name{
+    font-family:'Nanum Brush Script', cursive; font-size:40px; color:var(--ink);
+    line-height:1;
+  }
+
+  .values{background:var(--paper);}
+  .values-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:900px){.values-grid{grid-template-columns:repeat(2,1fr);}}
+  .value-cell{background:var(--paper); padding:34px 26px;}
+  .value-num{font-family:var(--serif); font-size:13px; color:var(--gold-500); letter-spacing:.1em;}
+  .value-name{font-family:var(--serif); font-size:19px; font-weight:600; color:var(--ink); margin-top:14px;}
+  .value-desc{margin-top:10px; font-size:13.3px; color:var(--ink-soft); font-weight:300; line-height:1.75;}
+
+  .history{background:var(--ivory); padding-top:97px;}
+  .mv-section{background:#4A3D31; padding:80px 0 0;}
+  .mv-grid{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:48px; padding-bottom:80px;}
+  @media (max-width:700px){.mv-grid{grid-template-columns:1fr; gap:48px; text-align:center;}}
+  .mv-cell{text-align:center;}
+  .mv-icon{width:44px; height:44px; margin:0 auto;}
+  .mv-label{
+    font-family:var(--sans); font-weight:700; letter-spacing:.12em; font-size:13px;
+    color:var(--gold-300); margin-top:16px;
+  }
+  .mv-phrase{
+    font-family:var(--serif); font-size:16px; color:var(--paper); font-weight:400;
+    line-height:1.7; margin-top:12px;
+  }
+  .mv-divider{width:1px; height:100px; background:rgba(250,247,239,.18);}
+  @media (max-width:700px){.mv-divider{display:none;}}
+
+  .core-card{
+    position:relative; z-index:2; background:var(--paper); border:1px solid var(--line);
+    margin:0 0 -70px; padding:52px 48px 60px;
+  }
+  @media (max-width:700px){.core-card{padding:40px 24px 48px; margin-bottom:-40px;}}
+  .core-card .sec-head{margin-bottom:36px;}
+  .core-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:700px){.core-grid{grid-template-columns:1fr;}}
+  .core-cell{position:relative; background:var(--paper); padding:36px 30px; overflow:hidden;}
+  .core-num{
+    position:absolute; top:-6px; right:12px; font-family:var(--serif); font-size:76px;
+    color:var(--ink); opacity:.06; font-weight:700; line-height:1; pointer-events:none;
+  }
+  .core-name{position:relative; font-family:var(--serif); font-size:21px; font-weight:600; color:var(--gold-700);}
+  .core-desc{position:relative; margin-top:10px; font-size:14px; color:var(--ink-soft); font-weight:300; line-height:1.75;}
+
+  .timeline-columns{display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:760px; margin:0 auto;}
+  @media (max-width:640px){
+    .timeline-columns{grid-template-columns:1fr; gap:0;}
+    .timeline-columns .timeline:first-child .t-item:last-child{padding-bottom:32px;}
+  }
+  .timeline{border-left:1px solid var(--line); margin-left:6px; padding-left:36px;}
+  .t-item{position:relative; padding-bottom:32px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{content:''; position:absolute; left:-41px; top:4px; width:9px; height:9px; border-radius:50%; background:var(--paper); border:2px solid var(--gold-500);}
+  .t-year{font-family:var(--serif); font-weight:600; color:var(--ink); font-size:16px;}
+  .t-desc{margin-top:5px; color:var(--ink-soft); font-size:14px; font-weight:300; line-height:1.9;}
+
+  .cert-recap{background:var(--paper);}
+  .cert-list{max-width:640px; margin:0 auto;}
+  .cert-row{display:flex; justify-content:space-between; align-items:baseline; padding:16px 0; border-bottom:1px solid var(--line); gap:20px;}
+  .cert-row .name{font-family:var(--serif); font-weight:600; color:var(--ink); font-size:15.5px; white-space:nowrap;}
+  .cert-row .desc{font-size:13px; color:var(--ink-soft); font-weight:300; text-align:right;}
+  .cert-more{margin-top:26px; font-size:13.5px; color:var(--gold-700); text-decoration:underline; text-underline-offset:3px;}
+
+  .cert-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:900px){.cert-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:520px){.cert-grid{grid-template-columns:1fr;}}
+  .cert-cell{
+    background:var(--paper); border:1px solid var(--line); padding:20px 20px 26px;
+    display:block; width:100%; text-align:left; cursor:pointer; font:inherit;
+    transition:box-shadow .35s var(--ease), transform .35s var(--ease);
+  }
+  .cert-cell:hover{transform:translateY(-4px); box-shadow:0 16px 32px rgba(42,35,28,.08);}
+  .cert-img{aspect-ratio:3/4; background:var(--ivory); overflow:hidden; margin-bottom:18px; border:1px solid var(--line);}
+  .cert-img img{width:100%; height:100%; object-fit:contain; display:block;
+    -webkit-user-drag:none; user-select:none; pointer-events:none;
+    transition:transform .5s var(--ease);}
+  .cert-cell:hover .cert-img img{transform:scale(1.03);}
+  .cert-name{font-family:var(--serif); font-size:18px; color:var(--ink); font-weight:600; line-height:1.3;}
+  .cert-desc{margin-top:8px; font-size:12.8px; color:var(--ink-soft); font-weight:300; line-height:1.7;}
+
+  .lightbox{
+    position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
+    background:rgba(20,16,12,.88); backdrop-filter:blur(4px); padding:40px 20px;
+    opacity:0; transition:opacity .3s var(--ease);
+  }
+  .lightbox.open{opacity:1;}
+  .lightbox[hidden]{display:none;}
+  .lb-inner{
+    background:var(--paper); max-width:720px; width:100%; max-height:100%;
+    display:flex; flex-direction:column; overflow:auto;
+  }
+  .lb-inner img{width:100%; height:auto; display:block; background:var(--ivory); -webkit-user-drag:none; user-select:none;}
+  .lb-caption{padding:24px 26px 28px;}
+  .lb-caption h3{font-family:var(--serif); font-size:20px; color:var(--ink); font-weight:600;}
+  .lb-caption p{margin-top:8px; font-size:14px; color:var(--ink-soft); font-weight:300; line-height:1.7;}
+  .lb-close{
+    position:absolute; top:18px; right:22px; background:none; border:0; cursor:pointer;
+    font-size:34px; line-height:1; color:var(--cream); padding:4px 10px;
+  }
+  .lb-nav{
+    position:absolute; top:50%; transform:translateY(-50%); background:none; border:0; cursor:pointer;
+    font-size:44px; line-height:1; color:var(--cream); padding:10px 16px; opacity:.75;
+    transition:opacity .25s var(--ease);
+  }
+  .lb-prev{left:12px;}
+  .lb-next{right:12px;}
+  @media (max-width:640px){
+    .lb-nav{font-size:34px; padding:8px 10px;}
+    .lb-prev{left:2px;} .lb-next{right:2px;}
+  }
+
+  .cta-band{background:var(--brown-950); padding:70px 0; text-align:center;}
+  .cta-band h3{font-family:var(--serif); font-size:24px; color:var(--paper); font-weight:600;}
+  .cta-band p{margin-top:12px; color:rgba(250,247,239,.65); font-size:14.5px; font-weight:300;}
+  .cta-band a{
+    display:inline-flex; margin-top:28px; padding:15px 32px; background:var(--gold-500); color:var(--brown-950);
+    font-size:14.5px; font-weight:600; letter-spacing:.02em; transition:transform .3s var(--ease);
+  }
+  .cta-band a:hover{transform:translateY(-2px);}
+
+  footer{background:var(--paper); padding:36px 0; border-top:1px solid var(--line); text-align:center;}
+  footer p{font-size:12.5px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img class="logo-img" src="../images/logo-black.png" alt="Aram Cosmetics logo">
+      <span>Aram Cosmetics<span class="sub">ARAM COSMETICS, LTD.</span></span>
+    </a>
+    <nav class="menu" id="menu">
+      <ul>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="index.html#products" class="nav-link">Products</a></li>
+        <li class="lang-toggle">
+          <a href="../about.html" class="lang-link">KOR</a>
+          <span class="lang-sep">|</span>
+          <span class="lang-current">ENG</span>
+        </li>
+        <li><a href="index.html#inquiry" class="nav-link nav-cta">Inquiry</a></li>
+      </ul>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="ph-banner">
+  <img src="../images/about-banner.jpg" alt="Aram Cosmetics product styling photo">
+  <div class="ph-banner-overlay"></div>
+  <div class="ph-banner-content">
+    <h1 class="ph-title">ABOUT ARAM</h1>
+  </div>
+</section>
+
+<section class="ceo-greeting">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">CEO GREETING</div>
+      <h2 class="sec-title">A Message from Our CEO</h2>
+    </div>
+    <div class="greeting-body">
+      <p>Thank you for taking the time to visit Aram Cosmetics.</p>
+      <p>Since our founding in 2017, one standard has always guided Aram Cosmetics: craftsmanship. We strive to create products whose quality speaks for itself from the moment they are seen and held. With the belief that no ingredient or step in the process should ever be overlooked, this commitment has enabled us to build partnerships beyond Korea, across the U.S., Hong Kong, and Taiwan.</p>
+      <p>Looking ahead, we will continue to respond to evolving trends in Korea and around the world while continuing to raise our standards of quality, so that every brand&#39;s value is expressed through the best possible craftsmanship.</p>
+      <p>Thank you.</p>
+    </div>
+    <div class="greeting-sign">
+      <span class="sign-role">CEO, Aram Cosmetics</span>
+      <span class="sign-name">John Doe</span>
+    </div>
+  </div>
+</section>
+
+<section class="mv-section">
+  <div class="wrap">
+    <div class="mv-grid">
+      <div class="mv-cell">
+        <svg class="mv-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 42.7 L21.1 40.06 C10.8 30.72 4 24.56 4 17 C4 10.84 8.84 6 15 6 C18.48 6 21.82 7.62 24 10.18 C26.18 7.62 29.52 6 33 6 C39.16 6 44 10.84 44 17 C44 24.56 37.2 30.72 26.9 40.08 Z" stroke="var(--gold-300)" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        <div class="mv-label">BELIEF</div>
+        <p class="mv-phrase">We believe a brand's value<br>is reflected in its craftsmanship</p>
+      </div>
+      <div class="mv-divider" aria-hidden="true"></div>
+      <div class="mv-cell">
+        <svg class="mv-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 7L37 12V21C37 30 31 36 24 40C17 36 11 30 11 21V12L24 7Z" stroke="var(--gold-300)" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M17.5 22L22 27L31 17" stroke="var(--gold-300)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="mv-label">PROMISE</div>
+        <p class="mv-phrase">We will never compromise on quality,<br>and we will always manufacture with integrity</p>
+      </div>
+    </div>
+
+    <div class="core-card">
+      <div class="sec-head">
+        <div class="sec-eyebrow">OUR STANDARD</div>
+        <h2 class="sec-title">Three Standards We Stand By</h2>
+      </div>
+      <div class="core-grid">
+        <div class="core-cell">
+          <div class="core-num">01</div>
+          <div class="core-name">Ingredients</div>
+          <div class="core-desc">We carefully select ingredients suited to each product and manage them rigorously from the moment they arrive.</div>
+        </div>
+        <div class="core-cell">
+          <div class="core-num">02</div>
+          <div class="core-name">Process</div>
+          <div class="core-desc">Standardized processes and systematic management keep quality consistent.</div>
+        </div>
+        <div class="core-cell">
+          <div class="core-num">03</div>
+          <div class="core-name">Inspection</div>
+          <div class="core-desc">Every finished product undergoes hands-on inspection, and only those that meet our standards are shipped.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="history">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">HISTORY</div>
+      <h2 class="sec-title">The Journey of Aram Cosmetics</h2>
+    </div>
+    <div class="timeline-columns">
+      <div class="timeline">
+        <div class="t-item"><div class="t-year">2017</div><div class="t-desc">Established Aram Cosmetics Co., Ltd.<br>Entered into an MOU with No.1 Inc., U.S.</div></div>
+        <div class="t-item"><div class="t-year">2018</div><div class="t-desc">Entered into an MOU with NICKA-K NEWYORK, U.S.</div></div>
+        <div class="t-item"><div class="t-year">2019</div><div class="t-desc">Entered into an MOU with ABSOLUTE NEWYORK, U.S.</div></div>
+        <div class="t-item"><div class="t-year">2020</div><div class="t-desc">Entered into an MOU with Shin's Trading, U.S.<br>Expanded manufacturing plant</div></div>
+      </div>
+      <div class="timeline">
+        <div class="t-item"><div class="t-year">2021</div><div class="t-desc">Registered as a quasi-drug manufacturer; obtained Excellent Enterprise certification</div></div>
+        <div class="t-item"><div class="t-year">2023</div><div class="t-desc">Expanded into the Hong Kong market</div></div>
+        <div class="t-item"><div class="t-year">2025</div><div class="t-desc">Expanded into the Taiwan market</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cert-recap">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">CERTIFICATE</div>
+      <h2 class="sec-title">Certifications</h2>
+    </div>
+    <div class="cert-grid reveal">
+      <button class="cert-cell" type="button"
+        data-img="../images/cert-iso22716-full.jpg"
+        data-title="ISO 22716"
+        data-desc="Good Manufacturing Practice (GMP) for cosmetics · Cleansing Tissues · Wet Wipes · Sheet Masks">
+        <div class="cert-img">
+          <img src="../images/cert-iso22716-thumb.jpg" alt="ISO 22716 certificate" loading="lazy">
+        </div>
+        <div class="cert-name">ISO 22716</div>
+        <div class="cert-desc">Good Manufacturing Practice (GMP) for cosmetics<br>Cleansing Tissues · Wet Wipes · Sheet Masks</div>
+      </button>
+      <button class="cert-cell" type="button"
+        data-img="../images/cert-iso9001-full.jpg"
+        data-title="ISO 9001"
+        data-desc="International Quality Management System certification">
+        <div class="cert-img">
+          <img src="../images/cert-iso9001-thumb.jpg" alt="ISO 9001 certificate" loading="lazy">
+        </div>
+        <div class="cert-name">ISO 9001</div>
+        <div class="cert-desc">International Quality Management System certification</div>
+      </button>
+      <button class="cert-cell" type="button"
+        data-img="../images/cert-iso14001-full.jpg"
+        data-title="ISO 14001"
+        data-desc="International Environmental Management System certification">
+        <div class="cert-img">
+          <img src="../images/cert-iso14001-thumb.jpg" alt="ISO 14001 certificate" loading="lazy">
+        </div>
+        <div class="cert-name">ISO 14001</div>
+        <div class="cert-desc">International Environmental Management System certification</div>
+      </button>
+      <button class="cert-cell" type="button"
+        data-img="../images/cert-fda-full.jpg"
+        data-title="FDA Registration"
+        data-desc="US FDA cosmetic facility registration (MoCRA)">
+        <div class="cert-img">
+          <img src="../images/cert-fda-thumb.jpg" alt="FDA (MoCRA) registration" loading="lazy">
+        </div>
+        <div class="cert-name">FDA Registration</div>
+        <div class="cert-desc">US FDA cosmetic facility registration (MoCRA)</div>
+      </button>
+      <button class="cert-cell" type="button"
+        data-img="../images/cert-quasi-full.jpg"
+        data-title="Quasi-Drug Manufacturing"
+        data-desc="Quasi-Drug Manufacturing Registration">
+        <div class="cert-img">
+          <img src="../images/cert-quasi-thumb.jpg" alt="Quasi-drug manufacturing registration" loading="lazy">
+        </div>
+        <div class="cert-name">Quasi-Drug Manufacturing</div>
+        <div class="cert-desc">Quasi-Drug Manufacturing Registration</div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h3>We look forward to building your brand with you</h3>
+  <p>From ingredient sourcing to production, Aram Cosmetics is with you every step of the way.</p>
+  <a href="index.html#inquiry">Contact Us</a>
+</div>
+
+<footer>
+  <p>94-16, Deungwon-ro 105beon-gil, Jori-eup, Paju-si, Gyeonggi-do, Korea · TEL +82-31-947-0948 · aram0948@naver.com</p>
+  <p style="margin-top:6px;">&copy; 2026 Aram Cosmetics, Ltd. All rights reserved.</p>
+</footer>
+
+
+<script>
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+
+  // Certificate lightbox
+  (function(){
+    const items = Array.from(document.querySelectorAll('.cert-cell'));
+    const lb = document.getElementById('lightbox');
+    if (!lb || !items.length) return;
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbDesc = document.getElementById('lbDesc');
+    let idx = 0, lastFocused = null;
+
+    function render(i){
+      idx = (i + items.length) % items.length;
+      const el = items[idx];
+      lbImg.src = el.dataset.img;
+      lbImg.alt = el.dataset.title || '';
+      lbTitle.textContent = el.dataset.title || '';
+      lbDesc.textContent = el.dataset.desc || '';
+    }
+    function open(i){
+      lastFocused = document.activeElement;
+      render(i);
+      lb.hidden = false;
+      requestAnimationFrame(() => lb.classList.add('open'));
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose').focus();
+    }
+    function close(){
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { lb.hidden = true; }, 300);
+      if (lastFocused) lastFocused.focus();
+    }
+
+    items.forEach((el, i) => el.addEventListener('click', () => open(i)));
+    document.getElementById('lbClose').addEventListener('click', close);
+    document.getElementById('lbPrev').addEventListener('click', () => render(idx - 1));
+    document.getElementById('lbNext').addEventListener('click', () => render(idx + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') render(idx - 1);
+      if (e.key === 'ArrowRight') render(idx + 1);
+    });
+  })();
+</script>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous">&#8249;</button>
+  <div class="lb-inner" role="document">
+    <img id="lbImg" src="" alt="" loading="lazy">
+    <div class="lb-caption">
+      <h3 id="lbTitle"></h3>
+      <p id="lbDesc"></p>
+    </div>
+  </div>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next">&#8250;</button>
+</div>
+
+</body>
+</html>
