@@ -6,7 +6,7 @@
 <title>회사소개 | 아람코스메틱</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#2a231c; --ink-soft:#6b6156;
@@ -28,13 +28,60 @@
 
   header.nav{position:sticky; top:0; z-index:100; background:rgba(255,253,248,0.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); padding:16px 0;}
   header.nav .wrap{display:flex; align-items:center; justify-content:space-between;}
-  .brand{font-family:var(--serif); font-weight:700; font-size:19px; color:var(--ink); display:flex; align-items:center; gap:10px;}
+  .brand{font-family:var(--serif); font-weight:700; font-size:19px; color:var(--ink); display:flex; align-items:center; gap:10px; text-decoration:none;}
   .logo-img{height:30px; width:auto; display:block;}
   .brand .sub{font-family:var(--sans); font-weight:300; font-size:10.5px; color:var(--gold-700); letter-spacing:.16em; display:block; margin-top:2px;}
-  .back-link{font-size:13.5px; color:var(--ink-soft); display:flex; align-items:center; gap:8px; transition:color .25s var(--ease);}
-  .back-link:hover{color:var(--gold-700);}
 
-  .ph-hero{padding:80px 0 64px; border-bottom:1px solid var(--line); background:var(--paper);}
+  nav.menu ul{display:flex; align-items:center; gap:34px; list-style:none;}
+  nav.menu a{font-size:14.5px; color:var(--ink); opacity:.85; letter-spacing:.02em; position:relative; padding-bottom:4px; transition:color .3s var(--ease), opacity .3s var(--ease); text-decoration:none;}
+  nav.menu a::after{content:''; position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--gold-500); transition:width .3s var(--ease);}
+  nav.menu a:hover{opacity:1;}
+  nav.menu a:hover::after{width:100%;}
+  .nav-cta{border:1px solid var(--gold-500); color:var(--gold-700)!important; padding:9px 20px; font-size:13.5px; transition:background .3s var(--ease), color .3s var(--ease);}
+  nav.menu a.nav-cta{padding-bottom:9px;}
+  .nav-cta:hover{background:var(--gold-500); color:var(--paper)!important;}
+
+  .lang-toggle{display:flex; align-items:baseline; gap:8px; list-style:none;}
+  .lang-current{font-size:14px; font-weight:600; letter-spacing:.06em; color:var(--gold-700);}
+  .lang-sep{font-size:12px; color:var(--line);}
+  nav.menu a.lang-link{font-size:11px; letter-spacing:.06em; color:var(--ink-soft)!important; opacity:1!important;}
+  .lang-link:hover{color:var(--gold-700)!important;}
+
+  .burger{display:none; width:26px; height:20px; position:relative; cursor:pointer; background:none; border:0;}
+  .burger span{position:absolute; left:0; right:0; height:1.5px; background:var(--ink); transition:all .3s var(--ease);}
+  .burger span:nth-child(1){top:0;} .burger span:nth-child(2){top:9px;} .burger span:nth-child(3){top:18px;}
+
+  @media (max-width:900px){
+    nav.menu{
+      position:fixed; inset:0 0 0 26%; background:var(--paper);
+      display:flex; align-items:center; padding:0 40px;
+      transform:translateX(100%); transition:transform .45s var(--ease); z-index:99;
+    }
+    nav.menu.open{transform:translateX(0);}
+    nav.menu ul{flex-direction:column; align-items:flex-start; gap:26px;}
+    nav.menu a{font-size:19px;}
+    .nav-cta{display:inline-flex;}
+    .burger{display:block;}
+  }
+
+  .ph-banner{position:relative; width:100%; aspect-ratio:4.13/1; overflow:hidden;}
+  @media (max-width:760px){.ph-banner{aspect-ratio:4/3;}}
+  .ph-banner img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .ph-banner-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,16,12,.35) 0%, rgba(20,16,12,.55) 100%);
+  }
+  .ph-banner-content{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center;
+    padding:0 24px;
+  }
+  .ph-banner .ph-title{
+    font-family:var(--sans); font-weight:700; letter-spacing:.06em;
+    color:var(--paper); font-size:clamp(28px,5vw,56px); max-width:none; line-height:1.3;
+    text-shadow:0 2px 16px rgba(0,0,0,.35);
+  }
+
+  .ph-hero{padding:56px 0 64px; border-bottom:1px solid var(--line); background:var(--paper);}
   .ph-eyebrow{display:flex; align-items:center; gap:10px; font-size:12.5px; letter-spacing:.26em; color:var(--gold-700); margin-bottom:20px;}
   .ph-eyebrow::before{content:''; width:26px; height:1px; background:var(--gold-500);}
   .ph-title{font-family:var(--serif); font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.35; max-width:720px;}
@@ -47,6 +94,24 @@
   .sec-eyebrow::before{content:''; width:22px; height:1px; background:var(--gold-500);}
   .sec-title{font-family:var(--serif); font-weight:600; font-size:clamp(22px,2.8vw,30px); color:var(--ink); line-height:1.4;}
 
+  .ceo-greeting{background:var(--ivory); padding:100px 0;}
+  @media (max-width:760px){.ceo-greeting{padding:70px 0;}}
+  .greeting-body{max-width:680px; margin:0 auto; border-left:2px solid var(--gold-500); padding-left:32px;}
+  .greeting-body p{
+    font-family:var(--serif); font-size:17px; line-height:2; color:var(--ink);
+    font-weight:400; margin-bottom:22px; text-align:justify;
+  }
+  .greeting-body p:last-child{margin-bottom:0;}
+  .greeting-sign{
+    max-width:680px; margin:36px auto 0; padding-top:28px; border-top:1px solid var(--line);
+    display:flex; align-items:baseline; justify-content:flex-end; gap:14px;
+  }
+  .sign-role{font-size:14px; color:var(--ink-soft); font-weight:300;}
+  .sign-name{
+    font-family:'Nanum Brush Script', cursive; font-size:40px; color:var(--ink);
+    line-height:1;
+  }
+
   .values{background:var(--paper);}
   .values-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
   @media (max-width:900px){.values-grid{grid-template-columns:repeat(2,1fr);}}
@@ -55,9 +120,44 @@
   .value-name{font-family:var(--serif); font-size:19px; font-weight:600; color:var(--ink); margin-top:14px;}
   .value-desc{margin-top:10px; font-size:13.3px; color:var(--ink-soft); font-weight:300; line-height:1.75;}
 
-  .history{background:var(--ivory);}
-  .timeline-columns{display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:760px;}
-  @media (max-width:640px){.timeline-columns{grid-template-columns:1fr; gap:0;}}
+  .history{background:var(--ivory); padding-top:97px;}
+  .mv-section{background:#4A3D31; padding:80px 0 0;}
+  .mv-grid{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:48px; padding-bottom:80px;}
+  @media (max-width:700px){.mv-grid{grid-template-columns:1fr; gap:48px; text-align:center;}}
+  .mv-cell{text-align:center;}
+  .mv-icon{width:44px; height:44px; margin:0 auto;}
+  .mv-label{
+    font-family:var(--sans); font-weight:700; letter-spacing:.12em; font-size:13px;
+    color:var(--gold-300); margin-top:16px;
+  }
+  .mv-phrase{
+    font-family:var(--serif); font-size:16px; color:var(--paper); font-weight:400;
+    line-height:1.7; margin-top:12px;
+  }
+  .mv-divider{width:1px; height:100px; background:rgba(250,247,239,.18);}
+  @media (max-width:700px){.mv-divider{display:none;}}
+
+  .core-card{
+    position:relative; z-index:2; background:var(--paper); border:1px solid var(--line);
+    margin:0 0 -70px; padding:52px 48px 60px;
+  }
+  @media (max-width:700px){.core-card{padding:40px 24px 48px; margin-bottom:-40px;}}
+  .core-card .sec-head{margin-bottom:36px;}
+  .core-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:700px){.core-grid{grid-template-columns:1fr;}}
+  .core-cell{position:relative; background:var(--paper); padding:36px 30px; overflow:hidden;}
+  .core-num{
+    position:absolute; top:-6px; right:12px; font-family:var(--serif); font-size:76px;
+    color:var(--ink); opacity:.06; font-weight:700; line-height:1; pointer-events:none;
+  }
+  .core-name{position:relative; font-family:var(--serif); font-size:21px; font-weight:600; color:var(--gold-700);}
+  .core-desc{position:relative; margin-top:10px; font-size:14px; color:var(--ink-soft); font-weight:300; line-height:1.75;}
+
+  .timeline-columns{display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:760px; margin:0 auto;}
+  @media (max-width:640px){
+    .timeline-columns{grid-template-columns:1fr; gap:0;}
+    .timeline-columns .timeline:first-child .t-item:last-child{padding-bottom:32px;}
+  }
   .timeline{border-left:1px solid var(--line); margin-left:6px; padding-left:36px;}
   .t-item{position:relative; padding-bottom:32px;}
   .t-item:last-child{padding-bottom:0;}
@@ -66,11 +166,59 @@
   .t-desc{margin-top:5px; color:var(--ink-soft); font-size:14px; font-weight:300; line-height:1.9;}
 
   .cert-recap{background:var(--paper);}
-  .cert-list{max-width:640px;}
+  .cert-list{max-width:640px; margin:0 auto;}
   .cert-row{display:flex; justify-content:space-between; align-items:baseline; padding:16px 0; border-bottom:1px solid var(--line); gap:20px;}
   .cert-row .name{font-family:var(--serif); font-weight:600; color:var(--ink); font-size:15.5px; white-space:nowrap;}
   .cert-row .desc{font-size:13px; color:var(--ink-soft); font-weight:300; text-align:right;}
   .cert-more{margin-top:26px; font-size:13.5px; color:var(--gold-700); text-decoration:underline; text-underline-offset:3px;}
+
+  .cert-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:900px){.cert-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:520px){.cert-grid{grid-template-columns:1fr;}}
+  .cert-cell{
+    background:var(--paper); border:1px solid var(--line); padding:20px 20px 26px;
+    display:block; width:100%; text-align:left; cursor:pointer; font:inherit;
+    transition:box-shadow .35s var(--ease), transform .35s var(--ease);
+  }
+  .cert-cell:hover{transform:translateY(-4px); box-shadow:0 16px 32px rgba(42,35,28,.08);}
+  .cert-img{aspect-ratio:3/4; background:var(--ivory); overflow:hidden; margin-bottom:18px; border:1px solid var(--line);}
+  .cert-img img{width:100%; height:100%; object-fit:contain; display:block;
+    -webkit-user-drag:none; user-select:none; pointer-events:none;
+    transition:transform .5s var(--ease);}
+  .cert-cell:hover .cert-img img{transform:scale(1.03);}
+  .cert-name{font-family:var(--serif); font-size:18px; color:var(--ink); font-weight:600; line-height:1.3;}
+  .cert-desc{margin-top:8px; font-size:12.8px; color:var(--ink-soft); font-weight:300; line-height:1.7;}
+
+  .lightbox{
+    position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
+    background:rgba(20,16,12,.88); backdrop-filter:blur(4px); padding:40px 20px;
+    opacity:0; transition:opacity .3s var(--ease);
+  }
+  .lightbox.open{opacity:1;}
+  .lightbox[hidden]{display:none;}
+  .lb-inner{
+    background:var(--paper); max-width:720px; width:100%; max-height:100%;
+    display:flex; flex-direction:column; overflow:auto;
+  }
+  .lb-inner img{width:100%; height:auto; display:block; background:var(--ivory); -webkit-user-drag:none; user-select:none;}
+  .lb-caption{padding:24px 26px 28px;}
+  .lb-caption h3{font-family:var(--serif); font-size:20px; color:var(--ink); font-weight:600;}
+  .lb-caption p{margin-top:8px; font-size:14px; color:var(--ink-soft); font-weight:300; line-height:1.7;}
+  .lb-close{
+    position:absolute; top:18px; right:22px; background:none; border:0; cursor:pointer;
+    font-size:34px; line-height:1; color:var(--cream); padding:4px 10px;
+  }
+  .lb-nav{
+    position:absolute; top:50%; transform:translateY(-50%); background:none; border:0; cursor:pointer;
+    font-size:44px; line-height:1; color:var(--cream); padding:10px 16px; opacity:.75;
+    transition:opacity .25s var(--ease);
+  }
+  .lb-prev{left:12px;}
+  .lb-next{right:12px;}
+  @media (max-width:640px){
+    .lb-nav{font-size:34px; padding:8px 10px;}
+    .lb-prev{left:2px;} .lb-next{right:2px;}
+  }
 
   .cta-band{background:var(--brown-950); padding:70px 0; text-align:center;}
   .cta-band h3{font-family:var(--serif); font-size:24px; color:var(--paper); font-weight:600;}
@@ -89,48 +237,95 @@
 
 <header class="nav">
   <div class="wrap">
-    <div class="brand">
+    <a href="index.html" class="brand">
       <img class="logo-img" src="images/logo-black.png" alt="아람코스메틱 로고">
       <span>아람코스메틱<span class="sub">ARAM COSMETICS, LTD.</span></span>
-    </div>
-    <a href="index.html" class="back-link">&larr; 홈으로</a>
+    </a>
+    <nav class="menu" id="menu">
+      <ul>
+        <li><a href="index.html#about" class="nav-link">회사소개</a></li>
+        <li><a href="index.html#products" class="nav-link">제품소개</a></li>
+        <li class="lang-toggle">
+          <span class="lang-current">KOR</span>
+          <span class="lang-sep">|</span>
+          <a href="en/index.html" class="lang-link">ENG</a>
+        </li>
+        <li><a href="index.html#inquiry" class="nav-link nav-cta">문의하기</a></li>
+      </ul>
+    </nav>
+    <button class="burger" id="burger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<section class="ph-hero">
-  <div class="wrap">
-    <div class="ph-eyebrow">ABOUT ARAM COSMETICS</div>
-    <h1 class="ph-title">화장품 제조, 그 기본에 충실합니다</h1>
-    <p class="ph-desc">아람코스메틱은 2017년 설립 이후, 물티슈·패드·클렌징티슈·마스크팩을 중심으로 화장품 및 위생용품 OEM·ODM 생산을 전문으로 해온 제조기업입니다. 정확한 공정과 국내외 인증을 바탕으로, 국내외 다양한 브랜드의 첫 생산 파트너가 되어왔습니다.</p>
+<section class="ph-banner">
+  <img src="images/about-banner.jpg" alt="아람코스메틱 화장품 제품 연출 사진">
+  <div class="ph-banner-overlay"></div>
+  <div class="ph-banner-content">
+    <h1 class="ph-title">ABOUT ARAM</h1>
   </div>
 </section>
 
-<section class="values">
+<section class="ceo-greeting">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-eyebrow">OUR VALUES</div>
-      <h2 class="sec-title">아람코스메틱이 일하는 방식</h2>
+      <div class="sec-eyebrow">CEO GREETING</div>
+      <h2 class="sec-title">대표 인사말</h2>
     </div>
-    <div class="values-grid">
-      <div class="value-cell">
-        <div class="value-num">01</div>
-        <div class="value-name">정확함</div>
-        <div class="value-desc">원료 입고부터 완제품 출고까지, 모든 공정을 정해진 기준대로 진행합니다.</div>
+    <div class="greeting-body">
+      <p>아람코스메틱을 찾아주신 여러분께 진심으로 감사드립니다.</p>
+      <p>2017년 설립 이후 지금까지, 아람코스메틱의 기준은 언제나 완성도 하나였습니다. 눈으로 보고 손으로 직접 만졌을 때 정말 잘 만들었다는 생각이 들 정도로 제품의 만듦새를 높이는 것. 원료 하나, 공정 한 단계도 대충 넘기지 않겠다는 신념으로, 우리는 국내를 넘어 미국·홍콩·대만 시장까지 파트너십을 넓혀올 수 있었습니다.</p>
+      <p>앞으로도 국내외 트렌드에 발맞춰 품질을 높이며, 브랜드의 가치를 가장 좋은 만듦새로 보여드릴 수 있도록 최선을 다하겠습니다.</p>
+      <p>감사합니다.</p>
+    </div>
+    <div class="greeting-sign">
+      <span class="sign-role">아람코스메틱 대표이사</span>
+      <span class="sign-name">홍길동</span>
+    </div>
+  </div>
+</section>
+
+<section class="mv-section">
+  <div class="wrap">
+    <div class="mv-grid">
+      <div class="mv-cell">
+        <svg class="mv-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 42.7 L21.1 40.06 C10.8 30.72 4 24.56 4 17 C4 10.84 8.84 6 15 6 C18.48 6 21.82 7.62 24 10.18 C26.18 7.62 29.52 6 33 6 C39.16 6 44 10.84 44 17 C44 24.56 37.2 30.72 26.9 40.08 Z" stroke="var(--gold-300)" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        <div class="mv-label">BELIEF</div>
+        <p class="mv-phrase">브랜드의 가치는<br>만듦새에서 드러난다고 믿습니다</p>
       </div>
-      <div class="value-cell">
-        <div class="value-num">02</div>
-        <div class="value-name">전문성</div>
-        <div class="value-desc">물티슈·패드·티슈·마스크팩 생산에 특화된 설비와 노하우를 갖추고 있습니다.</div>
+      <div class="mv-divider" aria-hidden="true"></div>
+      <div class="mv-cell">
+        <svg class="mv-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 7L37 12V21C37 30 31 36 24 40C17 36 11 30 11 21V12L24 7Z" stroke="var(--gold-300)" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M17.5 22L22 27L31 17" stroke="var(--gold-300)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="mv-label">PROMISE</div>
+        <p class="mv-phrase">품질 앞에서는 타협하지 않고,<br>정직하게 만들겠습니다</p>
       </div>
-      <div class="value-cell">
-        <div class="value-num">03</div>
-        <div class="value-name">신뢰</div>
-        <div class="value-desc">ISO·FDA 등록 등 국내외 인증을 통해 검증된 생산 기준을 유지합니다.</div>
+    </div>
+
+    <div class="core-card">
+      <div class="sec-head">
+        <div class="sec-eyebrow">OUR STANDARD</div>
+        <h2 class="sec-title">타협하지 않는 3가지</h2>
       </div>
-      <div class="value-cell">
-        <div class="value-num">04</div>
-        <div class="value-name">유연함</div>
-        <div class="value-desc">브랜드의 규모와 일정에 맞춰 소량 생산부터 대량 생산까지 대응합니다.</div>
+      <div class="core-grid">
+        <div class="core-cell">
+          <div class="core-num">01</div>
+          <div class="core-name">원료</div>
+          <div class="core-desc">제품의 특성에 맞는 원료를 엄선하고, 입고부터 철저하게 관리합니다.</div>
+        </div>
+        <div class="core-cell">
+          <div class="core-num">02</div>
+          <div class="core-name">공정</div>
+          <div class="core-desc">표준화된 공정과 체계적인 관리로 균일한 품질을 유지합니다.</div>
+        </div>
+        <div class="core-cell">
+          <div class="core-num">03</div>
+          <div class="core-name">검수</div>
+          <div class="core-desc">손과 눈으로 직접 검수한 완제품 중, 기준을 충족한 제품만 출고합니다.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -164,14 +359,58 @@
       <div class="sec-eyebrow">CERTIFICATE</div>
       <h2 class="sec-title">보유 인증</h2>
     </div>
-    <div class="cert-list">
-      <div class="cert-row"><div class="name">ISO 22716</div><div class="desc">화장품 우수제조 및 품질관리 기준(GMP)</div></div>
-      <div class="cert-row"><div class="name">ISO 9001</div><div class="desc">품질경영시스템 국제 인증</div></div>
-      <div class="cert-row"><div class="name">ISO 14001</div><div class="desc">환경경영시스템 국제 인증</div></div>
-      <div class="cert-row"><div class="name">FDA 등록</div><div class="desc">미국 화장품 제조시설 등록(MoCRA)</div></div>
-      <div class="cert-row"><div class="name">의약외품 제조업</div><div class="desc">의약외품 제조업 신고증(제654호)</div></div>
+    <div class="cert-grid reveal">
+      <button class="cert-cell" type="button"
+        data-img="images/cert-iso22716-full.jpg"
+        data-title="ISO 22716"
+        data-desc="화장품 우수제조 및 품질관리 기준(GMP) · 클리닝티슈 · 물티슈 · 마스크팩">
+        <div class="cert-img">
+          <img src="images/cert-iso22716-thumb.jpg" alt="ISO 22716 인증서" loading="lazy">
+        </div>
+        <div class="cert-name">ISO 22716</div>
+        <div class="cert-desc">화장품 우수제조 및 품질관리 기준(GMP)<br>클리닝티슈 · 물티슈 · 마스크팩</div>
+      </button>
+      <button class="cert-cell" type="button"
+        data-img="images/cert-iso9001-full.jpg"
+        data-title="ISO 9001"
+        data-desc="품질경영시스템 국제 인증">
+        <div class="cert-img">
+          <img src="images/cert-iso9001-thumb.jpg" alt="ISO 9001 인증서" loading="lazy">
+        </div>
+        <div class="cert-name">ISO 9001</div>
+        <div class="cert-desc">품질경영시스템 국제 인증</div>
+      </button>
+      <button class="cert-cell" type="button"
+        data-img="images/cert-iso14001-full.jpg"
+        data-title="ISO 14001"
+        data-desc="환경경영시스템 국제 인증">
+        <div class="cert-img">
+          <img src="images/cert-iso14001-thumb.jpg" alt="ISO 14001 인증서" loading="lazy">
+        </div>
+        <div class="cert-name">ISO 14001</div>
+        <div class="cert-desc">환경경영시스템 국제 인증</div>
+      </button>
+      <button class="cert-cell" type="button"
+        data-img="images/cert-fda-full.jpg"
+        data-title="FDA 등록"
+        data-desc="미국 FDA 화장품 제조시설 등록(MoCRA)">
+        <div class="cert-img">
+          <img src="images/cert-fda-thumb.jpg" alt="FDA(MoCRA) 등록증" loading="lazy">
+        </div>
+        <div class="cert-name">FDA 등록</div>
+        <div class="cert-desc">미국 FDA 화장품 제조시설 등록(MoCRA)</div>
+      </button>
+      <button class="cert-cell" type="button"
+        data-img="images/cert-quasi-full.jpg"
+        data-title="의약외품 제조업"
+        data-desc="의약외품 제조업 신고증(제654호)">
+        <div class="cert-img">
+          <img src="images/cert-quasi-thumb.jpg" alt="의약외품 제조업 신고증" loading="lazy">
+        </div>
+        <div class="cert-name">의약외품 제조업</div>
+        <div class="cert-desc">의약외품 제조업 신고증(제654호)</div>
+      </button>
     </div>
-    <a href="index.html#certificate" class="cert-more">인증서 원본 보기 &rarr;</a>
   </div>
 </section>
 
@@ -185,6 +424,75 @@
   <p>경기도 파주시 조리읍 등원로105번길 94-16 · TEL 031-947-0948 · aram0948@naver.com</p>
   <p style="margin-top:6px;">&copy; 2026 Aram Cosmetics, Ltd. All rights reserved.</p>
 </footer>
+
+
+<script>
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+
+  // Certificate lightbox
+  (function(){
+    const items = Array.from(document.querySelectorAll('.cert-cell'));
+    const lb = document.getElementById('lightbox');
+    if (!lb || !items.length) return;
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbDesc = document.getElementById('lbDesc');
+    let idx = 0, lastFocused = null;
+
+    function render(i){
+      idx = (i + items.length) % items.length;
+      const el = items[idx];
+      lbImg.src = el.dataset.img;
+      lbImg.alt = el.dataset.title || '';
+      lbTitle.textContent = el.dataset.title || '';
+      lbDesc.textContent = el.dataset.desc || '';
+    }
+    function open(i){
+      lastFocused = document.activeElement;
+      render(i);
+      lb.hidden = false;
+      requestAnimationFrame(() => lb.classList.add('open'));
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose').focus();
+    }
+    function close(){
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { lb.hidden = true; }, 300);
+      if (lastFocused) lastFocused.focus();
+    }
+
+    items.forEach((el, i) => el.addEventListener('click', () => open(i)));
+    document.getElementById('lbClose').addEventListener('click', close);
+    document.getElementById('lbPrev').addEventListener('click', () => render(idx - 1));
+    document.getElementById('lbNext').addEventListener('click', () => render(idx + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') render(idx - 1);
+      if (e.key === 'ArrowRight') render(idx + 1);
+    });
+  })();
+</script>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+  <button class="lb-close" id="lbClose" type="button" aria-label="닫기">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="이전">&#8249;</button>
+  <div class="lb-inner" role="document">
+    <img id="lbImg" src="" alt="" loading="lazy">
+    <div class="lb-caption">
+      <h3 id="lbTitle"></h3>
+      <p id="lbDesc"></p>
+    </div>
+  </div>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="다음">&#8250;</button>
+</div>
 
 </body>
 </html>
